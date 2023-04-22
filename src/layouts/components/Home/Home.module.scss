@@ -1,0 +1,22 @@
+.wrapper {
+    width: 100%;
+
+    & .contents {
+        width: 100%;
+        padding-top: 10px;
+        display: flex;
+        justify-content: flex-start;
+
+        & .wrapper-item {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
+            & .content-box {
+                width: 100%;
+                max-width: calc(3 * (360px + 20px));
+                margin-right: 140px;
+            }
+        }
+    }
+}

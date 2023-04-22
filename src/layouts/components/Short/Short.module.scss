@@ -1,0 +1,20 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+}
+
+.contents {
+    flex: 1;
+    flex-basis: 1e-9px;
+}
+
+.short-view {
+    display: block;
+    width: 100%;
+    height: calc(100vh - var(--height-header));
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-padding-top: 24px;
+}

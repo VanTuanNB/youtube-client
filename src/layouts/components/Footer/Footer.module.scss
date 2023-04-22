@@ -1,0 +1,25 @@
+.footer {
+    & .guide-primary,
+    .guide-secondary {
+        padding: 16px 24px 0;
+
+        & .guide-links {
+            margin-right: 8px;
+            display: inline-block;
+            text-decoration: none;
+            color: #aaa;
+            font-size: 1.3rem;
+            font-weight: 500;
+            line-height: 1.8rem;
+        }
+    }
+
+    & #copyright {
+        padding: 16px 24px;
+        color: #717171;
+        font-family: 'Roboto', 'Arial', sans-serif;
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+        font-weight: 400;
+    }
+}

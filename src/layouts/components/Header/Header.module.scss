@@ -1,0 +1,70 @@
+.header {
+    width: 100%;
+    padding: 0 16px;
+    height: var(--height-header);
+    background-color: var(--dark-color);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 9999999;
+
+    & .left {
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+
+        & .header-menu {
+            padding: 8px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        & .header-menu-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        & .home-link {
+            align-items: center;
+            flex: none;
+            display: flex;
+            flex-direction: row;
+            align-self: center;
+            padding: 18px 14px 18px 16px;
+            position: relative;
+
+            &::after {
+                position: absolute;
+                top: 11px;
+                right: -3px;
+                content: 'VN';
+                color: var(--sub-color);
+                font-size: 1rem;
+            }
+        }
+
+        & .logo-app {
+            position: relative;
+        }
+    }
+
+    & .center {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex: 0 1 728px;
+        min-width: 0px;
+    }
+
+    & .right {
+        display: flex;
+        align-items: center;
+    }
+}

@@ -1,0 +1,115 @@
+.wrapper {
+    width: 100%;
+
+    .container-profile {
+        width: 100%;
+        padding: 0 24px;
+
+        & .profile-header {
+            display: flex;
+            align-items: center;
+
+            & .header-avatar {
+                width: 80px;
+                height: 80px;
+                max-width: 80px;
+                max-width: 80px;
+                min-height: 80px;
+                min-width: 80px;
+                margin-right: 24px;
+
+                & .header-avatar-img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+
+            & .header-info {
+                display: inline-flex;
+                flex-direction: column;
+
+                & .header-info-channel-name {
+                    font-size: 2.4rem;
+                    font-weight: 400;
+                    margin: 0;
+                }
+
+                & .header-info-channel-sub-text {
+                    font-size: 1.4rem;
+                    color: var(--sub-color);
+                }
+            }
+        }
+
+        & .navbar-options {
+            width: 100%;
+            margin-top: 16px;
+
+            & .navbar-list-options {
+                display: flex;
+                align-items: center;
+                padding-left: 0;
+                margin: 0;
+                list-style: none;
+
+                & .navbar-option-item {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
+
+        & .width-bar-wrapper {
+            width: 100%;
+            height: 4px;
+            position: relative;
+
+            & .width-bar-size {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 156px;
+                height: 100%;
+                background-color: var(--sub-color);
+                border-radius: 6px;
+                transition: ease 0.4s;
+            }
+        }
+
+        & .contents {
+            max-width: 100%;
+        }
+    }
+
+    .error-page {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        & .error-thumbnail {
+            margin-top: 100px;
+        }
+
+        & .error-wrapper-text {
+            margin-top: 20px;
+            text-align: center;
+
+            & .error-text {
+                color: var(--sub-color);
+            }
+        }
+    }
+
+    & .navbar-option-item-link {
+        width: 100%;
+        height: 48px;
+        padding: 0 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

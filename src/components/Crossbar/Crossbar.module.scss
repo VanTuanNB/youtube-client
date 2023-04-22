@@ -1,0 +1,14 @@
+.crossbar {
+    width: 100%;
+    overflow: hidden;
+    touch-action: pan-y;
+    margin-left: 20px;
+
+    & .crossbar-list {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: calc(100% - 52px);
+        overflow-y: auto;
+    }
+}

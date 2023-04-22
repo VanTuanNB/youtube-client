@@ -1,26 +1,97 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { rootRouter } from './routes/index.route';
+import IRoute from '@/interfaces/IRoute';
+import PrimaryLayout from '@/layouts/PrimaryLayout/index.component';
+import ProtectPrivateRoute from '@/routes/ProtectPrivateRoutes.component';
+import GlobalStyle from '@/components/GlobalStyle/index.component';
+import { Fragment } from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <GlobalStyle>
+            <div className="App">
+                <BrowserRouter>
+                    <Routes>
+                        {rootRouter.map((route: IRoute, index: number) => {
+                            let Layout = route.layout;
+                            const Page = route.component;
+                            switch (Layout) {
+                                case null:
+                                    return (
+                                        <Route
+                                            key={index}
+                                            path={route.path}
+                                            children={route.children && route.children}
+                                            errorElement={route.errorElement && route.errorElement}
+                                            element={
+                                                <Fragment key={index}>
+                                                    {route.private ? (
+                                                        <ProtectPrivateRoute>
+                                                            <Page></Page>
+                                                        </ProtectPrivateRoute>
+                                                    ) : (
+                                                        <Page></Page>
+                                                    )}
+                                                </Fragment>
+                                            }
+                                        />
+                                    );
+                                case undefined:
+                                    Layout = PrimaryLayout;
+                                    return (
+                                        <Route
+                                            key={index}
+                                            path={route.path}
+                                            children={route.children && route.children}
+                                            errorElement={route.errorElement && route.errorElement}
+                                            element={
+                                                <Fragment key={index}>
+                                                    {route.private ? (
+                                                        <ProtectPrivateRoute>
+                                                            <Layout>
+                                                                <Page></Page>
+                                                            </Layout>
+                                                        </ProtectPrivateRoute>
+                                                    ) : (
+                                                        <Layout>
+                                                            <Page></Page>
+                                                        </Layout>
+                                                    )}
+                                                </Fragment>
+                                            }
+                                        />
+                                    );
+                                default:
+                                    return (
+                                        <Route
+                                            key={index}
+                                            path={route.path}
+                                            children={route.children && route.children}
+                                            errorElement={route.errorElement && route.errorElement}
+                                            element={
+                                                <Fragment key={index}>
+                                                    {route.private ? (
+                                                        <ProtectPrivateRoute>
+                                                            <Layout>
+                                                                <Page></Page>
+                                                            </Layout>
+                                                        </ProtectPrivateRoute>
+                                                    ) : (
+                                                        <Layout>
+                                                            <Page></Page>
+                                                        </Layout>
+                                                    )}
+                                                </Fragment>
+                                            }
+                                        />
+                                    );
+                            }
+                        })}
+                    </Routes>
+                </BrowserRouter>
+            </div>
+        </GlobalStyle>
+    );
 }
 
 export default App;

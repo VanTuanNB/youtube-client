@@ -1,0 +1,20 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+
+    & .spinner-icon {
+        animation: spinner linear 1s infinite;
+    }
+
+    @keyframes spinner {
+        to {
+            transform: rotate(360deg);
+        }
+        from {
+            transform: rotate(0);
+        }
+    }
+}
