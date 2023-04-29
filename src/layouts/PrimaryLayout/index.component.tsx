@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useEffect, useState } from 'react';
+import { ReactElement, useCallback, useEffect, useState, Suspense } from 'react';
 import { useMatch } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
@@ -21,7 +21,7 @@ function PrimaryLayout({ children }: { children: ReactElement }) {
     }, [params]);
 
     return (
-        <>
+        <Suspense fallback={<h1>Loading....</h1>}>
             <Header onClickMenu={handleToggleSidebar} />
             <div className={cx('contents', !!params && 'watching')}>
                 {!!params && (
@@ -30,7 +30,7 @@ function PrimaryLayout({ children }: { children: ReactElement }) {
                 <Sidebar isUserWatching={showSidebar} layoutWatch={params} />
                 {children}
             </div>
-        </>
+        </Suspense>
     );
 }
 

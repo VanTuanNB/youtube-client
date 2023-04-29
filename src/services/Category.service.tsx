@@ -87,7 +87,7 @@ export const categories: Array<ICategory> = [
         activeIcon: <WatchSeeIconActive width="24px" height="24px" />,
     },
     {
-        path: '/playlist',
+        path: '/playlistLike',
         title: 'Video đã thích',
         icon: <LikeIcon width="24px" height="24px" />,
         activeIcon: <LikeIconActive width="24px" height="24px" />,
@@ -96,19 +96,14 @@ export const categories: Array<ICategory> = [
 
 export const subscribesUser: Array<ICategory> = [
     {
-        path: '/@Levi97',
-        title: 'Levi',
-        avatar: 'https://yt3.ggpht.com/4ffrJrze6zBmxEfzUhR3TqYXBHWU_O6sii9jILfUdMbd8HhBAtk7CYeBEM-fp_S6RYu81Szsnw=s88-c-k-c0x00ffffff-no-rj',
+        path: '/@caovantuanfplhcm',
+        title: 'Cao Van Tuan (FPL HCM)',
+        avatar: 'https://lh3.googleusercontent.com/a/AGNmyxbCjcbGssa4CvaerFDPP-JU3Rm3YfThbPT5S032=s96-c',
     },
     {
-        path: '/@Levi97',
-        title: 'Levi',
-        avatar: 'https://yt3.ggpht.com/4ffrJrze6zBmxEfzUhR3TqYXBHWU_O6sii9jILfUdMbd8HhBAtk7CYeBEM-fp_S6RYu81Szsnw=s88-c-k-c0x00ffffff-no-rj',
-    },
-    {
-        path: '/@Levi97',
-        title: 'Levi',
-        avatar: 'https://yt3.ggpht.com/4ffrJrze6zBmxEfzUhR3TqYXBHWU_O6sii9jILfUdMbd8HhBAtk7CYeBEM-fp_S6RYu81Szsnw=s88-c-k-c0x00ffffff-no-rj',
+        path: '/@tuancao',
+        title: 'Tuấn Cao',
+        avatar: 'https://lh3.googleusercontent.com/a/AGNmyxZXmtuh14i7GZHOwHv8JoNjr8r2cG26gIcH8PPb=s96-c',
     },
 ];
 
@@ -171,10 +166,12 @@ export const categoriesAction: Array<ICategory> = [
         activeIcon: <DiaryIconActive width="24px" height="24px" />,
     },
     {
+        path: '/help',
         title: 'Trợ giúp',
         icon: <QuestionIcon width="24px" height="24px" />,
     },
     {
+        path: '/feedback',
         title: 'Gửi ý kiến phản hồi',
         icon: <FeedbackIcon width="24px" height="24px" />,
     },

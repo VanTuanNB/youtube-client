@@ -90,8 +90,10 @@ function PopperSearch() {
                                         onKeyDown={(e) => {
                                             if (e.repeat) return e.preventDefault();
                                             if (e.code === 'Enter' || e.code === 'NumpadEnter') {
-                                                navigate('/results?search_query=' + keyword);
-                                                setShowHeadless(false);
+                                                if (keyword.trim()) {
+                                                    navigate('/results?search_query=' + keyword);
+                                                    setShowHeadless(false);
+                                                }
                                             }
                                         }}
                                     />

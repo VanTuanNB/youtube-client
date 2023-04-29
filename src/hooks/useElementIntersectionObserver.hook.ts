@@ -7,7 +7,7 @@ export default function useElementIntersectionObserver<T = any>(
 ): boolean {
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const callbackFunction = (entries: IntersectionObserverEntry[]) => {
-        const [entry] = entries; //const entry = entries[0]
+        const [entry] = entries;
         setIsVisible(entry.isIntersecting);
     };
     const optionsMemo = useMemo(() => {

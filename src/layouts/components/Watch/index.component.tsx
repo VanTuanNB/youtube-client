@@ -13,6 +13,8 @@ import { getVideoById, getAll } from '@/services/Video.service';
 
 import styles from './Watch.module.scss';
 import { SpinnerIcon } from '@/components/Icons/index.component';
+import CustomProcessBar from '@/components/ProcessBar/index.component';
+import LostConnectNetWork from '@/components/LostConnection/index.component';
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +22,7 @@ function Watch() {
     const [searchParam] = useSearchParams();
     const [data, setData] = useState<IVideo>();
     const [suggest, setSuggest] = useState<Array<IVideo>>([]);
+    const [networkError, setNetworkError] = useState<boolean>(false);
     const navigate = useNavigate();
     useEffect(() => {
         if (searchParam.get('id')) {
@@ -35,6 +38,7 @@ function Watch() {
                     setData(data);
                 })
                 .catch((error) => {
+                    console.log(error);
                     navigate(-1);
                 });
         } else {
@@ -47,32 +51,42 @@ function Watch() {
             getAll()
                 .then((res: IResponse) => res.data)
                 .then((data: Array<IVideo>) => setSuggest(data))
-                .catch((error) => console.log(error));
+                .catch((error) => {
+                    console.log(error);
+                    setNetworkError(true);
+                });
         }
     }, [data]);
     return (
-        <div className={cx('content')}>
-            <div className={cx('columns')}>
-                <div className={cx('primary')}>
-                    {data ? (
-                        <PrimaryWatch data={data} />
-                    ) : (
-                        <div className={cx('spinner-wrapper')}>
-                            <SpinnerIcon width="30px" height="30px" className={cx('spinner-icon')} />
+        <>
+            {!data && <CustomProcessBar />}
+            {networkError ? (
+                <LostConnectNetWork />
+            ) : (
+                <div className={cx('content')}>
+                    <div className={cx('columns')}>
+                        <div className={cx('primary')}>
+                            {data ? (
+                                <PrimaryWatch data={data} />
+                            ) : (
+                                <div className={cx('spinner-wrapper')}>
+                                    <SpinnerIcon width="30px" height="30px" className={cx('spinner-icon')} />
+                                </div>
+                            )}
                         </div>
-                    )}
-                </div>
-                <div className={cx('secondary')}>
-                    {suggest.length > 0 ? (
-                        <SuggestWatch videoActiveId={data?._id} suggestedVideos={suggest} />
-                    ) : (
-                        <div className={cx('spinner-wrapper')}>
-                            <SpinnerIcon width="30px" height="30px" className={cx('spinner-icon')} />
+                        <div className={cx('secondary')}>
+                            {suggest.length > 0 ? (
+                                <SuggestWatch videoActiveId={data?._id} suggestedVideos={suggest} />
+                            ) : (
+                                <div className={cx('spinner-wrapper')}>
+                                    <SpinnerIcon width="30px" height="30px" className={cx('spinner-icon')} />
+                                </div>
+                            )}
                         </div>
-                    )}
+                    </div>
                 </div>
-            </div>
-        </div>
+            )}
+        </>
     );
 }
 

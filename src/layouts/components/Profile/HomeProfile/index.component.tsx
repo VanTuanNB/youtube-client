@@ -8,18 +8,21 @@ import IVideo from '@/interfaces/IVideo';
 import { getAllVideoByUserId } from '@/services/Video.service';
 import IResponse from '@/interfaces/IResponse';
 import RichVideo from '@/components/RichVideo/index.component';
+import SkeletonLoading from '@/components/SkeletonLoading/index.component';
 
 const cx = classNames.bind(styles);
 
 function HomeProfile() {
     const { isLogin, user } = useOutletContext<{ isLogin: boolean; user: IUser }>();
     const [videos, setVideos] = useState<Array<IVideo>>([]);
-    const [load, setLoad] = useState<boolean>(false);
+    const [hasVideo, setHasVideo] = useState<boolean>(false);
+    const [skeletonLoading, setSkeletonLoading] = useState<boolean>(true);
     useEffect(() => {
         getAllVideoByUserId(user._id)
             .then((response: IResponse) => {
                 if (response.success) {
-                    setLoad(true);
+                    setHasVideo(true);
+                    setSkeletonLoading(false);
                     return setVideos(response.data);
                 }
                 return Promise.reject(response);
@@ -27,18 +30,16 @@ function HomeProfile() {
             .catch((error) => console.log(error));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]);
-    console.log(isLogin);
+
     return (
         <>
             <div className={cx('wrapper')}>
-                {videos.length > 0 && (
-                    <div className={cx('row', 'sm-gutter')}>
-                        {videos.map((video: IVideo) => (
-                            <RichVideo small key={video._id} video={video} />
-                        ))}
-                    </div>
-                )}
-                {(user && videos.length) === 0 && (
+                <div className={cx('row', 'sm-gutter')}>
+                    {skeletonLoading && <SkeletonLoading small count={6} />}
+                    {!skeletonLoading &&
+                        videos.map((video: IVideo) => <RichVideo small key={video._id} video={video} />)}
+                </div>
+                {!skeletonLoading && (user && videos.length) === 0 && (
                     <div className={cx('none-box')}>
                         <div className={cx('none-thumbnail')}>
                             <img
@@ -47,7 +48,7 @@ function HomeProfile() {
                                 className={cx('none-img')}
                             />
                         </div>
-                        {isLogin && load && (
+                        {isLogin && hasVideo && (
                             <div className={cx('title-my-info')}>
                                 <p className={cx('header-text-info')}>Tải một video lên để bắt đầu</p>
                                 <p className={cx('sub-title')}>
@@ -59,7 +60,7 @@ function HomeProfile() {
                                 </NavLink>
                             </div>
                         )}
-                        {!isLogin && load && (
+                        {!isLogin && hasVideo && (
                             <div>
                                 <p>Kênh của {user.username} không có video nào! Hãy xem các kênh khác</p>
                             </div>
