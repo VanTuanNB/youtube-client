@@ -7,24 +7,30 @@ import { useEffect, useState } from 'react';
 import { getAllShort } from '@/services/Short.service';
 import IResponse from '@/interfaces/IResponse';
 import CustomProcessBar from '@/components/ProcessBar/index.component';
+import LostConnectNetWork from '@/components/LostConnection/index.component';
 
 const cx = classNames.bind(styles);
 
 function Short() {
     const [shorts, setShorts] = useState<Array<IShort>>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const [networkError, setNetworkError] = useState<boolean>(false);
 
     useEffect(() => {
         getAllShort()
             .then((response: IResponse) => response.data)
             .then((data: Array<IShort>) => setShorts(data))
-            .catch((error) => console.log(error))
+            .catch((error) => {
+                console.log(error);
+                setNetworkError(true);
+            })
             .finally(() => setLoading(false));
     }, []);
     return (
         <div className={cx('wrapper')}>
             {loading && <CustomProcessBar />}
-            {!loading && (
+            {!loading && networkError && <LostConnectNetWork />}
+            {!loading && !networkError && (
                 <div className={cx('contents')}>
                     <div className={cx('short-view')}>
                         {shorts.map((short: IShort) => (

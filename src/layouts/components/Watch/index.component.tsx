@@ -39,7 +39,11 @@ function Watch() {
                 })
                 .catch((error) => {
                     console.log(error);
-                    navigate(-1);
+                    if (navigator.onLine) {
+                        navigate(-1);
+                    } else {
+                        navigate('/');
+                    }
                 });
         } else {
             navigate('/');

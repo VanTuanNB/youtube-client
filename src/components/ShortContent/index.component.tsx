@@ -99,11 +99,23 @@ function ShortContent({ data }: { data: IShort }) {
                     </div>
                     <div className={cx('short-control')}>
                         {play ? (
-                            <button className={cx('btn-control')} onClick={() => setPlay(false)}>
+                            <button
+                                className={cx('btn-control')}
+                                onClick={() => {
+                                    videoRef.current!.pause();
+                                    setPlay(false);
+                                }}
+                            >
                                 <PauseIcon width="24px" height="24px" />
                             </button>
                         ) : (
-                            <button className={cx('btn-control')} onClick={() => setPlay(true)}>
+                            <button
+                                className={cx('btn-control')}
+                                onClick={() => {
+                                    videoRef.current!.play();
+                                    setPlay(true);
+                                }}
+                            >
                                 <PlayIcon width="24px" height="24px" />
                             </button>
                         )}
